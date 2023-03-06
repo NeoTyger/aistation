@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1037
   m_ShowMode: 4
-  m_Title: Game
+  m_Title: Project
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -48,7 +48,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 21
+  controlID: 90
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -68,8 +68,8 @@ MonoBehaviour:
     y: 0
     width: 358
     height: 987
-  m_MinSize: {x: 275, y: 50}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 276, y: 71}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 14}
   m_Panes:
   - {fileID: 14}
@@ -224,7 +224,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 200}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 29
+  controlID: 91
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -249,7 +249,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 30
+  controlID: 92
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -354,14 +354,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\n3oti\OneDrive\Documentos\UnityProjects\NavMeshAgents_p2
+  m_LastProjectPath: C:\Users\n3oti\OneDrive\Documentos\UnityProjects\aistation
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 605f0000
-    m_LastClickedID: 24416
-    m_ExpandedIDs: 00000000605f000000ca9a3bffffff7f
+    m_SelectedIDs: e6100100
+    m_LastClickedID: 69862
+    m_ExpandedIDs: 00000000e610010000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -519,7 +519,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 8ed5ffffd2d5ffff0ed6ffff2cfbffffe6050100
+      m_ExpandedIDs: 2eaeffff7eaeffffcaaeffff50b0ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -801,9 +801,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -34.11343, y: -30.498615, z: -2.572229}
+    m_Target: {x: -43.428734, y: -32.77935, z: 1.9106493}
     speed: 2
-    m_Value: {x: -34.11343, y: -30.498615, z: -2.572229}
+    m_Value: {x: -43.428734, y: -32.77935, z: 1.9106493}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -850,9 +850,9 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.19243118, y: 0.75235486, z: -0.25041485, w: -0.57813597}
+    m_Target: {x: -0.1883728, y: 0.72065276, z: -0.21489906, w: -0.63167214}
     speed: 2
-    m_Value: {x: -0.1924296, y: 0.75234866, z: -0.2504128, w: -0.5781312}
+    m_Value: {x: -0.1883713, y: 0.720647, z: -0.21489735, w: -0.6316671}
   m_Size:
     m_Target: 40.386696
     speed: 2
