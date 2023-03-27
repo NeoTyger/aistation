@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.AI;
 
 public class BlueAgentFSM : MonoBehaviour {
@@ -7,6 +9,7 @@ public class BlueAgentFSM : MonoBehaviour {
     public GameObject Redagent;
     private NavMeshAgent Blueagent;
     State currentState;
+    public float blueLife = 100f; // To store the blue agent life
 
 
     void Start() {
@@ -19,7 +22,14 @@ public class BlueAgentFSM : MonoBehaviour {
     // Update is called once per frame
     void Update() {
         // Trobam a l'enemic
-                 currentState = currentState.Process(); // Calls Process method to ensure correct state is set.
-            }
-    
+        currentState = currentState.Process(); // Calls Process method to ensure correct state is set.
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("ai") && blueLife > 0)
+        {
+            blueLife = blueLife - 10f * Time.deltaTime;
+        }
+    }
 }
