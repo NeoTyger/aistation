@@ -24,7 +24,7 @@ public class State
     protected static Transform player; // To store the transform of the player. This will let the guard know where the player is, so it can face the player and know whether it should be shooting or chasing (depending on the distance).
     protected State nextState; // This is NOT the enum above, it's the state that gets to run after the one currently running (so if IDLE was then going to PATROL, nextState would be PATROL).
     protected NavMeshAgent agent; // To store the NPC NavMeshAgent component.
-    protected float timerVigilance = 0f; // To store the time that blueAgent looks for us in the last position that it saw us and now has no vision
+    //protected float timerVigilance = 0f; // To store the time that blueAgent looks for us in the last position that it saw us and now has no vision
     protected BlueAgentFSM _blueAgentFsm; // To communicate with the script BlueAgentFSM
     protected float minimumDistance = 10.0f; // To store the minimum security distance between blue and red
     protected static Vector3 directionToPlayer = npc.transform.position - player.transform.position; // To store
@@ -86,7 +86,7 @@ public class State
         return false;
     }
 
-    public bool BlueHide()
+    /*public bool BlueHide()
     {
         if (distanceToPlayer > minimumDistance)
         {
@@ -94,7 +94,7 @@ public class State
         }
 
         return false;
-    }
+    }*/
 
 }
 
@@ -114,15 +114,9 @@ public class Idle : State
     }
     public override void Update()
     {
-        if (Input.GetKeyDown(KeyCode.P))
+        if (!BlueLookRed())
         {
             nextState = new Patrol(npc, agent, player);
-            stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
-        }
-        // The only place where Update can break out of itself. Set chance of breaking out at 10%.
-        else if(Input.GetKeyDown(KeyCode.A))
-        {
-            nextState = new Attack(npc, agent, player);
             stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
         }
     }
@@ -171,20 +165,15 @@ public class Patrol : State
         if(Vector3.Distance(npc.transform.position, listaPuntos[puntActual]) < 1)
         {
            puntActual+=1;
-            }
+        }
         if (puntActual==listaPuntos.Length){
             puntActual=0;
         }
 
         agent.SetDestination(listaPuntos[puntActual]); // Set agents destination 
-
-        if (Input.GetKeyDown(KeyCode.I))
-        {
-            nextState = new Idle(npc, agent, player);
-            stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
-        }
+        
         // The only place where Update can break out of itself. Set chance of breaking out at 10%.
-        else if(Input.GetKeyDown(KeyCode.A))
+        if(BlueLookRed())
         {
             nextState = new Attack(npc, agent, player);
             stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
@@ -217,15 +206,9 @@ public class Attack : State
     {
         agent.SetDestination(player.position); // Set agents destination 
 
-        if (Input.GetKeyDown(KeyCode.I))
+        if (!BlueLookRed())
         {
             nextState = new Idle(npc, agent, player);
-            stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
-        }
-        // The only place where Update can break out of itself. Set chance of breaking out at 10%.
-        else if(Input.GetKeyDown(KeyCode.P))
-        {
-            nextState = new Patrol(npc, agent, player);
             stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
         }
         else if(_blueAgentFsm.blueLife <= 50f)
@@ -267,8 +250,6 @@ public class Escape : State
             Vector3 direccion = npc.transform.position - player.transform.position;
             Vector3 newPosition = npc.transform.position + Vector3.Normalize(direccion) * 3;
 
-            BlueHide();
-            
             nextState = new Recover(npc, agent, player);
             stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
         }
@@ -291,7 +272,7 @@ public class Recover : State
 
     public override void Enter()
     {
-        agent.isStopped = false; 
+        agent.isStopped = true; 
         base.Enter();
     }
 
@@ -301,16 +282,15 @@ public class Recover : State
         
         if (_blueAgentFsm.blueLife >= 70f && !BlueLookRed())
         {
-            //BlueHide() = false;
             nextState = new Idle(npc, agent, player);
             stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
         }
         // The only place where Update can break out of itself. Set chance of breaking out at 10%.
-        else if(_blueAgentFsm.blueLife >= 70f && BlueLookRed() && !BlueHide())
+        else if(_blueAgentFsm.blueLife >= 70f && BlueLookRed())
         {
             nextState = new Attack(npc, agent, player);
             stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
-        }   
+        }
     }
 
     public override void Exit()

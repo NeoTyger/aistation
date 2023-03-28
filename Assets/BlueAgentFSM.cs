@@ -30,6 +30,7 @@ public class BlueAgentFSM : MonoBehaviour {
         if (collision.gameObject.CompareTag("ai") && blueLife > 0)
         {
             blueLife = blueLife - 10f * Time.deltaTime;
+            Debug.Log(blueLife);
         }
     }
 }
